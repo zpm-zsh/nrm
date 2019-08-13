@@ -1,23 +1,26 @@
 #!/usr/bin/env zsh
 
 function _nrm_args {
-  _arguments -s -A "-*"                                     \
-  '(-h --help)'{-h,--help}'[Show help information]'         \
-  '(-v --version)'{-v,--version}'[output the version number]'
+  _arguments -s -A "-*"                                       \
+  '(-h --help)'{-h,--help}'[Show help information]'           \
+  '(-v --version)'{-v,--version}'[output the version number]' \
+
 }
 
 function _nrm_help {
-  _arguments -s -A "-*"                           \
-  '(-h --help)'{-h,--help}'[Show help information]'
+  _arguments -s -A "-*"                                       \
+  '(-h --help)'{-h,--help}'[Show help information]'           \
+
 }
 
 function _nrm_publish {
-  _arguments -s -A "-*"                                 \
-  '(-t --tag)'{-t,--tag}'[Add tag]'                     \
-  '(-a --access)'{-a,--access}'[Set access]'            \
-  '(-o --otp)'{-o,--otp}'[Set otpcode]'                 \
-  '(-dr --dry-run)'{-dr,--dry-run}'[Set is dry run]'    \
-  '(-h --help)'{-h,--help}'[Output usage information]'  \
+  _arguments -s -A "-*"                                       \
+  '(-t --tag)'{-t,--tag}'[Add tag]'                           \
+  '(-a --access)'{-a,--access}'[Set access]'                  \
+  '(-o --otp)'{-o,--otp}'[Set otpcode]'                       \
+  '(-dr --dry-run)'{-dr,--dry-run}'[Set is dry run]'          \
+  '(-h --help)'{-h,--help}'[Output usage information]'        \
+
 }
 
 _nrm_repos=()
