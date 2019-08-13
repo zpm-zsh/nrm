@@ -50,9 +50,6 @@ _nrm(){
       use|del|home)
         _describe -t commands "Nrm repos" _nrm_repos
       ;;
-      puburl|ls|filestatus|sharelink)
-        _files
-      ;;
       *)
         return
       ;;
