@@ -11,6 +11,15 @@ function _nrm_help {
   '(-h --help)'{-h,--help}'[Show help information]'
 }
 
+function _nrm_publish {
+  _arguments -s -A "-*"                                 \
+  '(-t --tag)'{-t,--tag}'[Add tag]'                     \
+  '(-a --access)'{-a,--access}'[Set access]'            \
+  '(-o --otp)'{-o,--otp}'[Set otpcode]'                 \
+  '(-dr --dry-run)'{-dr,--dry-run}'[Set is dry run]'    \
+  '(-h --help)'{-h,--help}'[Output usage information]'  \
+}
+
 _nrm_repos=()
 nrm ls | sed 's/^..//' | sed -r '/^\s*$/d' | awk '{print $1" "$3}' | while read _repo; do
   name="$(echo $_repo | awk '{print $1}' )"
@@ -43,12 +52,15 @@ _nrm(){
     return
   fi
   
-  if (( CURRENT == 2 )); then
+  if (( CURRENT > 1 )); then
     
-    _nrm_help
     case "$words[1]" in
-      use|del|home)
+      use|del|home|set-auth|set-email|set-hosted-repo)
+        _nrm_help
         _describe -t commands "Nrm repos" _nrm_repos
+      ;;
+      publish)
+        _nrm_publish
       ;;
       *)
         return
