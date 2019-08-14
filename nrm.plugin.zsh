@@ -1,17 +1,5 @@
 #!/usr/bin/env zsh
 
-function _nrm_args {
-  _arguments -s -A "-*"                                       \
-  '(-h --help)'{-h,--help}'[Show help information]'           \
-  '(-v --version)'{-v,--version}'[output the version number]' \
-  
-}
-
-function _nrm_help {
-  _arguments -s -A "-*"                                       \
-  '(-h --help)'{-h,--help}'[Show help information]'           \
-  
-}
 
 function _nrm_publish {
   _arguments -s -A "-*"                                       \
@@ -46,8 +34,24 @@ _nrm_commands=(
 )
 
 _nrm(){
-  _nrm_args
-  _arguments                 \
+    
+  if (( CURRENT == 2 )); then
+    
+    _nrm_args=(
+      '(-h --help)'{-h,--help}'[Show help information]'
+      '(-v --version)'{-v,--version}'[output the version number]'
+    )
+  else
+    
+    _nrm_args=(
+      '(-h --help)'{-h,--help}'[Show help information]'
+    )
+    
+  fi
+  
+  
+  _arguments -s -A "-*"              \
+  "${_nrm_args[@]}"                  \
   '*:: :->subcmds' && return 0
   
   if (( CURRENT == 1 )); then
@@ -59,7 +63,6 @@ _nrm(){
     
     case "$words[1]" in
       use|del|home|set-auth|set-email|set-hosted-repo)
-        _nrm_help
         _describe -t commands "Nrm repos" _nrm_repos
       ;;
       publish)
