@@ -11,6 +11,7 @@ function _nrm_publish {
   
 }
 
+local _repo
 typeset -g _nrm_repos
 _nrm_repos=()
 nrm ls | sed 's/^..//' | sed -r '/^\s*$/d' | awk '{print $1" "$3}' | while read _repo; do
