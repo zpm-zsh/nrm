@@ -11,6 +11,7 @@ function _nrm_publish {
   
 }
 
+typeset -g _nrm_repos
 _nrm_repos=()
 nrm ls | sed 's/^..//' | sed -r '/^\s*$/d' | awk '{print $1" "$3}' | while read _repo; do
   name="$(echo $_repo | awk '{print $1}' )"
@@ -18,6 +19,7 @@ nrm ls | sed 's/^..//' | sed -r '/^\s*$/d' | awk '{print $1" "$3}' | while read 
   _nrm_repos+="${name}:${description}"
 done
 
+typeset -g _nrm_commands
 _nrm_commands=(
   'ls:List all the registries'
   'current:Show current registry name'
